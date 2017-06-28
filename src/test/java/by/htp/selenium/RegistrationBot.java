@@ -31,7 +31,7 @@ public class RegistrationBot {
 		registryElement.findElement(By.name("registrationForm.corporate")).click();
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 
-		registryElement.findElement(By.xpath("//div[@id='register-form']/div[3]/form/label[4]")).submit();
+		registryElement.findElement(By.xpath("//*[@id='register-form']//input[@name='ok']")).submit();
 	}
 
 	@AfterClass

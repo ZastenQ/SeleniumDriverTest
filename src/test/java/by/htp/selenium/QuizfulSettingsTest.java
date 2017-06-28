@@ -22,10 +22,10 @@ public class QuizfulSettingsTest {
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
 		WebElement loginElement = driver.findElement(By.id("login-form"));
-		// loginElement.findElement(By.name("registrationForm.login")).sendKeys("IvanDurak");
-		// loginElement.findElement(By.name("registrationForm.password")).sendKeys("IvanPW");
-		loginElement.findElement(By.name("loginForm.login")).sendKeys("ZastenQ");
-		loginElement.findElement(By.name("loginForm.password")).sendKeys("QuizAcc7");
+		 loginElement.findElement(By.name("registrationForm.login")).sendKeys("IvanDurak");
+		 loginElement.findElement(By.name("registrationForm.password")).sendKeys("IvanPW");
+		//loginElement.findElement(By.name("loginForm.login")).sendKeys("ZastenQ");
+		//loginElement.findElement(By.name("loginForm.password")).sendKeys("QuizAcc7");
 		loginElement.findElement(By.name("ok")).click();
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 	}
@@ -62,9 +62,10 @@ public class QuizfulSettingsTest {
 		WebElement setElement = driver.findElement(By.id("edit-profile-page"));
 		setElement.findElement(By.id("profile-privacy-form")).findElement(By.className("title")).click();
 
-		setElement.findElement(By.name("privacyForm.profileVisibility"));
-
-		// findElement(By.xpath("//input[@name='privacyForm.profileVisibility'])[3]")).click();
+		setElement
+				.findElement(By
+						.xpath("//*[@id='edit-profile-page']/div[@id='profile-privacy-form']//input[@name='privacyForm.profileVisibility'][@value='closed']"))
+				.click();
 
 		setElement.findElement(By.name("privacyForm.save")).click();
 	}
@@ -76,15 +77,17 @@ public class QuizfulSettingsTest {
 		WebElement setElement = driver.findElement(By.id("edit-profile-page"));
 		setElement.findElement(By.id("profile-notifications-form")).findElement(By.className("title")).click();
 
-		WebElement radioNotif = setElement.findElement(By.className("notifications"));
+		WebElement radioNotif = setElement.findElement(By.xpath(
+				"//*[@id='edit-profile-page']/div[@id='profile-notifications-form']//input[@name='notificationsForm.notificationsEnabled'][@checked='checked']"));
 		boolean radioStatusNot = radioNotif.isSelected();
-		if (!radioStatusNot) {
+		if (radioStatusNot) {
 			radioNotif.click();
 		}
 
-		WebElement radioDeliv = setElement.findElement(By.className("deliveries"));
+		WebElement radioDeliv = setElement.findElement(By.xpath(
+				"//*[@id='edit-profile-page']/div[@id='profile-notifications-form']//input[@name='notificationsForm.deliveryEnabled'][@checked='checked']"));
 		boolean radioStatusDel = radioDeliv.isSelected();
-		if (!radioStatusDel) {
+		if (radioStatusDel) {
 			radioDeliv.click();
 		}
 		setElement.findElement(By.name("notificationsForm.save")).click();
@@ -92,6 +95,6 @@ public class QuizfulSettingsTest {
 
 	@AfterClass
 	public static void closeBrowser() {
-		// driver.quit();
+		 driver.quit();
 	}
 }
